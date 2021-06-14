@@ -3,6 +3,7 @@ package com.flavio.estudos.spring.hrworker.controllers;
 import com.flavio.estudos.spring.hrworker.entities.Worker;
 import com.flavio.estudos.spring.hrworker.repositories.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,9 @@ import java.util.List;
 @RequestMapping(value = "/workers")
 public class WorkerController {
 
+    @Value("${test.config}")
+    private String TestConfig;
+
     @Autowired
     private WorkerRepository repository;
 
@@ -22,6 +26,11 @@ public class WorkerController {
     public ResponseEntity<List<Worker>> findAll(){
         List<Worker> list = repository.findAll();
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/configs")
+    public ResponseEntity<String> getConfigs(){
+        return ResponseEntity.ok(TestConfig);
     }
 
     @GetMapping(value = "/{id}")
