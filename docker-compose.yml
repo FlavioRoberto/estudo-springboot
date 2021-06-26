@@ -30,7 +30,6 @@ services:
      ports: 
         - "8888:8888"
      networks:
-        - hr-database-network
         - hr-network
 
   hr-eureka-server:
@@ -39,6 +38,13 @@ services:
       context: ./hr-eureka-server
     ports:
       - "8761:8761"
+    networks:
+      - hr-network
+
+  hr-worker:
+    container_name: hr-worker
+    build:
+      context: ./hr-worker
     networks:
       - hr-database-network
       - hr-network
