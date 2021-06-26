@@ -1,0 +1,45 @@
+version: '3.7'
+
+networks:
+    hr-database-network:
+        driver: bridge
+    hr-network:
+      driver: bridge
+
+services:
+  
+  hr-postgres:
+    image: postgres
+    container_name: hr_postgres
+    environment:
+       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+        - ./postgres/data:/data/postgresss
+    ports:
+        - "5432:5432"
+    networks:
+        - hr-database-network
+ 
+  hr-config-server:
+     container_name: hr-config-server
+     build:
+        context: ./hr-config-server   
+     environment: 
+        - 'GITHUB_USER:$GITHUB_USER'
+        - 'GITHUB_PASS:$GITHUB_PASS'
+     ports: 
+        - "8888:8888"
+     networks:
+        - hr-database-network
+        - hr-network
+
+  hr-eureka-server:
+    container_name: hr-eureka-server
+    build:
+      context: ./hr-eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - hr-database-network
+      - hr-network
+
