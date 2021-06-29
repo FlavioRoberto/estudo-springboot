@@ -10,6 +10,5 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 #
 FROM openjdk:11-jre-slim
-COPY --from=build /home/app/target/hr-config-server-0.0.1-SNAPSHOT.jar /home/app/hr-config-server.jar
-EXPOSE 8888
-ENTRYPOINT ["java","-jar","/home/app/hr-config-server.jar"]
+COPY --from=build /home/app/target/hr-payload-0.0.1-SNAPSHOT.jar /home/app/hr-payload.jar
+ENTRYPOINT ["java","-jar","/home/app/hr-payload.jar"]
