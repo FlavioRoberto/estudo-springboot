@@ -1,4 +1,4 @@
-package com.flavio.estudos.spring.hr.hruser.hruser;
+package com.flavio.estudos.spring.hr.hruser.hruser.tests.controllers;
 
 import com.flavio.estudos.spring.hr.hruser.hruser.controllers.UserController;
 import com.flavio.estudos.spring.hr.hruser.hruser.entities.Role;
@@ -69,6 +69,6 @@ public class HrUserControllerTests {
                 .andExpect(content().json("{id:1,name:Test,email:teste@test,password:password,roles:[{id:1, roleName: 'admin'}]}"))
                 .andReturn();
 
-        verify(service, times(1)).findById(anyInt());
+        verify(service, times(1)).findById(anyLong());
     }
 }
