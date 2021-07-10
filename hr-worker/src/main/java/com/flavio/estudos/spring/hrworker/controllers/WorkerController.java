@@ -18,9 +18,6 @@ import java.util.List;
 @RequestMapping(value = "/workers")
 public class WorkerController {
 
-    @Value("${test.config}")
-    private String TestConfig;
-
     @Autowired
     private WorkerRepository repository;
 
@@ -28,11 +25,6 @@ public class WorkerController {
     public ResponseEntity<List<Worker>> findAll(){
         List<Worker> list = repository.findAll();
         return ResponseEntity.ok(list);
-    }
-
-    @GetMapping(value = "/configs")
-    public ResponseEntity<String> getConfigs(){
-        return ResponseEntity.ok(TestConfig);
     }
 
     @GetMapping(value = "/{id}")

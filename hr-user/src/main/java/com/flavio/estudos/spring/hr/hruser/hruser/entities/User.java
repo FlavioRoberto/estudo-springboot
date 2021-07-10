@@ -23,7 +23,7 @@ public class User implements Serializable {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public User() {
+    protected User() {
     }
 
     public User(Long id, String name, String email, String password) {
@@ -31,6 +31,10 @@ public class User implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public void addRole(Role role){
+        roles.add(role);
     }
 
     public Long getId() {

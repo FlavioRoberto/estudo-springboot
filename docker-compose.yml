@@ -25,8 +25,8 @@ services:
     build:
       context: ./hr-config-server
     environment:
-      - 'GITHUB_USER:$GITHUB_USER'
-      - 'GITHUB_PASS:$GITHUB_PASS'
+      - GITHUB_USER=$GITHUB_USER
+      - GITHUB_PASS=$GITHUB_PASS
     ports:
       - "8888:8888"
     networks:
@@ -40,6 +40,18 @@ services:
       - "8761:8761"
     networks:
       - hr-network
+
+  hr-api-gateway-zull:
+    container_name: hr-api-gateway-zull
+    build:
+      context: ./hr-api-gateway-zull
+    ports:
+      - "8765:8765"
+    networks:
+      - hr-network
+    depends_on:
+      - hr-eureka-server
+      - hr-config-server
 
   hr-worker:
     build:

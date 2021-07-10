@@ -12,7 +12,7 @@ public class Role implements Serializable {
     private Long id;
     private String roleName;
 
-    public Role() {
+    protected Role() {
     }
 
     public Role(Long id, String roleName) {
